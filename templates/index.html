@@ -1,10 +1,1 @@
-from flask import Flask, render_template
-
-app = Flask(__name__)
-
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-if __name__ == "__main__":
-    app.run()
+<!DOCTYPE html>&#10;<html lang="en">&#10;<head>&#10;    <meta charset="UTF-8">&#10;    <meta name="viewport" content="width=device-width, initial-scale=1.0">&#10;    <title>{{ data.name }} - {{ data.title }}</title>&#10;    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">&#10;</head>&#10;<body>&#10;    <div class="container">&#10;        <header>&#10;            <h1>{{ data.name }}</h1>&#10;            <p><strong>{{ data.title }}</strong></p>&#10;        </header>&#10;&#10;        <nav>&#10;            <a href="#about">About</a>&#10;            <a href="#skills">Skills</a>&#10;            <a href="#projects">Projects</a>&#10;            <a href="#contact">Contact</a>&#10;        </nav>&#10;&#10;        <section id="about">&#10;            <h2>About Me</h2>&#10;            <p>{{ data.bio }}</p>&#10;            <p>Email: <a href="mailto:{{ data.email }}">{{ data.email }}</a></p>&#10;            <div id="dateTime"></div>&#10;        </section>&#10;&#10;        <section id="skills">&#10;            <h2>Skills</h2>&#10;            <ul>&#10;                {% for skill in data.skills %}<li>{{ skill }}</li>{% endfor %}</ul>&#10;        </section>&#10;&#10;        <section id="projects">&#10;            <h2>Projects</h2>&#10;            {% for project in data.projects %}<div class="project">&#10;                <h3><a href="{{ project.link }}">{{ project.name }}</a></h3>&#10;                <p>{{ project.description }}</p>&#10;            </div>{% endfor %}</section>&#10;&#10;        <section id="contact">&#10;            <h2>Connect</h2>&#10;            <p><a href="{{ data.social_links.linkedin }}" target="_blank">LinkedIn</a> | &#10;            <a href="{{ data.social_links.leetcode }}" target="_blank">LeetCode</a> | &#10;            <a href="{{ data.social_links.github }}" target="_blank">GitHub</a></p>&#10;        </section>&#10;&#10;        <footer>&#10;            <p>&amp;copy; 2024 {{ data.name }}. All rights reserved.</p>&#10;        </footer>&#10;    </div>&#10;    <script src="{{ url_for('static', filename='script.js') }}" defer></script>&#10;</body>&#10;</html>
